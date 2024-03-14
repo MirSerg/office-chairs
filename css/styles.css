@@ -1,0 +1,204 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url("../fonts/Roboto.ttf");
+}
+
+body{
+  font-family: Roboto, sans-serif;
+  background: #F9F9F9;
+}
+
+.header{
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+  background: rgb(255, 255, 255);
+  text-align: center;
+  padding: 39px 0 30px 0;
+}
+
+.menu ul{
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+
+.menu ul li{
+  /* отступ снизу до черты */
+  padding-bottom: 8px;
+  margin: 0 50px;
+  /* этот прямоугольник надо сделать прозрачным,
+   чтобы сам header при наведении не сдвигался вниз на толщину бордера 2 px */
+  border-bottom: 2px solid transparent;
+  transition: all .5s ease;
+}
+
+.menu ul li:hover{
+  border-bottom: 2px solid rgb(0, 0, 0);
+  /* увеличим текст при наведении на 10% */
+  /* свойство transform при увеличении не влияет на сетку элементов */
+  transform: scale(1.1);
+}
+
+.menu ul a{
+  text-decoration: none;
+  font-size: 20px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+
+.products{
+  /* в макете отступ сверху 65px, но между блоками 40px,
+   поэтому оставляем 25 = 65 - 40 */
+  padding-top: 25px;
+  padding-bottom: 37px;
+}
+
+.container{
+  /* 980 получается от суммы блоков по горизонтали и отступов между ними
+  980 = 300 + 40 + 40 */
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  /* разносим элементы по сторонам */
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.product{
+  width: 300px;
+  padding: 20px;
+  /* чтобы отступы (padding) входили в ширину - применим box-sizing: border-box */
+  box-sizing: border-box;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 40px;
+  /* добавляем анимацию */
+  transition: all .5s;
+}
+
+.product:hover{
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.45);
+}
+
+.product-image{
+  height: 250px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.product-text{
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  line-height: 23px;
+  margin: 15px 0 13px 0;
+  /* свойство text-align: center не нужно, т.к. оно наследуется в классе .product */
+  /*text-align: center;*/
+}
+
+.button{
+  width: 260px;
+  height: 57px;
+  border: 0;
+  padding: 17px;
+  box-sizing: border-box;
+  background: rgb(0, 169, 222);
+  border-radius: 10px;
+  font-size: 20px;
+  /* свойство text-align: center не нужно, т.к. оно наследуется в классе .product */
+  /*text-align: center;*/
+  color: rgb(255, 255, 255);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.product-action .button::after{
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: #005d79;
+  /* сделаем псевдоэлемент над кнопкой */
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  transform: translate(0, 100%);
+  transition: all .3s;
+}
+
+.product-action .button:hover::after{
+  transform: translate(0, 0);
+}
+
+.product-action .button > span{
+  z-index: 2;
+  position: relative;
+}
+
+.phone{
+  border-radius: 50%;
+  background: radial-gradient(50.00% 50.00% at 50% 50%,rgb(1, 118, 255),rgb(114, 179, 255) 100%);
+  width: 100px;
+  height: 100px;
+  /* фиксируем блок снизу */
+  position: fixed;
+  bottom: 45px;
+  right: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulse 1s infinite;
+  cursor: pointer;
+}
+
+.phone:hover{
+  /*animation-play-state: paused;*/
+  background: radial-gradient(50.00% 50.00% at 50% 50%, rgb(35, 255, 1), rgb(128, 255, 114) 100%);
+}
+
+.phone::before{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse-2 1s infinite;
+  background: radial-gradient(50.00% 50.00% at 50% 50%,rgb(1, 118, 255),rgb(114, 179, 255) 100%);
+}
+
+/*.phone:hover::before {*/
+/*  animation-play-state: paused;*/
+/*}*/
+
+@keyframes pulse {
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-2 {
+  0%{
+    transform: scale(1);
+    opacity: 1;
+  }
+  100%{
+    transform: scale(2);
+    opacity: 0;
+  }
+}
